@@ -11,7 +11,7 @@ class Program
             Console.Clear();
             Console.WriteLine("=== System zarządzania ikonami ===");
             Console.WriteLine("1. Dodaj i wyświetl ikonę");
-            Console.WriteLine("2. Pokaż liczbę unikalnych ikon");
+            Console.WriteLine("2. Pokaż wszystkie ikony");
             Console.WriteLine("0. Wyjdź");
             Console.Write("Wybierz opcję: ");
             var choice = Console.ReadLine();
@@ -20,11 +20,18 @@ class Program
             {
                 Console.Write("Podaj nazwę ikony: ");
                 var name = Console.ReadLine();
-                Console.Write("Podaj ścieżkę do pliku: ");
-                var filePath = Console.ReadLine();
+                Console.Write("Podaj rozmiar ikony: ");
+                var sizeInput = Console.ReadLine();
 
-                var icon = factory.GetIcon(name, filePath);
-                icon.Display(0, 0);
+                if (!int.TryParse(sizeInput, out int size))
+                {
+                    Console.WriteLine("Nieprawidłowy rozmiar. Naciśnij dowolny klawisz, aby kontynuować...");
+                    Console.ReadKey();
+                    continue;
+                }
+
+                var icon = factory.GetIcon(name, size);
+                icon.Display();
 
                 Console.WriteLine("Naciśnij dowolny klawisz, aby kontynuować...");
                 Console.ReadKey();
@@ -32,6 +39,8 @@ class Program
             else if (choice == "2")
             {
                 Console.WriteLine($"Liczba unikalnych ikon: {factory.IconCount}");
+                factory.DisplayAllIcons();
+
                 Console.WriteLine("Naciśnij dowolny klawisz, aby kontynuować...");
                 Console.ReadKey();
             }

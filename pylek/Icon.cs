@@ -3,16 +3,17 @@
 public class Icon
 {
     public string Name { get; }
-    public string FilePath { get; }
+    public int Size { get; }
 
-    public Icon(string name, string filePath)
+    public Icon(string name, int size)
     {
         Name = name;
-        FilePath = filePath;
+        Size = size;
+        Console.WriteLine($"Tworzenie ikony: {name}, rozmiar: {size}");
     }
 
-    public void Display(int x, int y)
+    public void Display()
     {
-        Console.WriteLine($"Wyświetlam ikonę '{Name}' z pliku '{FilePath}' na pozycji ({x}, {y})");
+        Console.WriteLine($"Wyświetlanie ikony: {Name}, rozmiar: {Size}");
     }
 }
